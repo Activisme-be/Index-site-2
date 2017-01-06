@@ -39,6 +39,6 @@ class NewsDb extends Model
      */
     public function tags()
     {
-        return $this->belongsToMany('Tags');
+        return $this->belongsToMany('Tags', 'pivot_news_tags', 'tags_id', 'article_id');
     }
 }
