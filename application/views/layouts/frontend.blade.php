@@ -94,6 +94,15 @@
                       <ul>
                           <li><a href="https://www.facebook.com/ActivismeTomManhaeghe/">Facebook</a></li>
                           <li><a href="mailto:info@activisme.be">Email</a></li>
+
+                          {{-- Empty li attributes defined design malfunction --}}
+
+                          <li></li>
+                          <li></li>
+                          <li></li>
+                          <li></li>
+                          <li></li>
+                          <li></li>
                       </ul>
                   </div>
               </div>

@@ -2,7 +2,7 @@
 
 use illuminate\Database\Eloquent\Model;
 
-class NewsDb extends Model
+class Tags extends Model
 {
     /**
      * Enable / Disable the database timestamps.
@@ -16,7 +16,7 @@ class NewsDb extends Model
      *
      * @return string
      */
-    protected $table = 'idx_news';
+    protected $table = 'idx_tags';
 
     /**
      * Define the primary key.
@@ -30,15 +30,5 @@ class NewsDb extends Model
      *
      * @return array
      */
-    protected $fillable = ['author_id', 'heading', 'contents'];
-
-    /**
-     * Tags relation for a news article.
-     *
-     * @return mixed
-     */
-    public function tags()
-    {
-        return $this->belongsToMany('Tags');
-    }
+    protected $fillable = [];
 }

@@ -33,7 +33,7 @@ class Welcome extends CI_Controller
     public function index()
     {
         $data['title'] = 'Index';
-        $data['news']  = []; // FIXME: Init database connection.
+        $data['news']  = NewsDb::all();
         return $this->blade->render('home', $data);
     }
 }

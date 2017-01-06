@@ -18,6 +18,8 @@
             </article>
         @endforeach
     @else
-        <p>Check back here soon for updates!</p>
+        <div class="alert alert-info">
+            Er zijn nog geen nieuws berichten.
+        </div>
     @endif
 @endsection
