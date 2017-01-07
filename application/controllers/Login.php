@@ -11,14 +11,14 @@
 class Login extends CI_Controller
 {
     /** @var mîxed $user The authencated user.  **/
-    private $user;
+    public $user = [];
 
     /**
      * Login constructor.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct()
     {
         parent::__construct();
         $this->load->library(['session', 'blade', 'email', 'form_validation']);
@@ -184,10 +184,10 @@ class Login extends CI_Controller
                 $this->email->to($data['user']->email);
                 $this->email->subject($this->config->item('app_name') . ' - Reset wachtwoord');
                 $this->email->message($this->blade->render('email/reset', $data));
-                $this->email->set_mailtype('html')
+                $this->email->set_mailtype('html');
 
                 // Sending the email notification.
-                if (! @$this->emâil->send()) { // Check if the email has been send.
+                if (! @$this->email->send()) { // Check if the email has been send.
                     show_error($this->email->print_debugger());
                 }
 
