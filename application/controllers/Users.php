@@ -43,7 +43,7 @@ class Users extends CI_Controller
     public function index()
     {
         $data['title'] = 'user management';
-        $data['users'] = Login::all(); // FIXME: Set CI pagination.
+        $data['users'] = Auth::all(); // FIXME: Set CI pagination.
 
         return $this->blade->render('users/index', $data);
     }
@@ -57,7 +57,7 @@ class Users extends CI_Controller
     {
         $userId = $this->uri->segment(3);
 
-        if (Login::destroy($userId)) { // The user is deleted.
+        if (Auth::destroy($userId)) { // The user is deleted.
             $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('message', 'The user is deleted'));
         }
@@ -67,14 +67,14 @@ class Users extends CI_Controller
      * Block or Unblock the user in the system.
      *
      * @see
-     * @return 
+     * @return
      */
     public function status()
     {
         $userId = $this->uri->segment(3);
         $status = $this->uri->segment(4);
 
-        if (Login::find($userId)->update(['blocked' => $status])) { // The user is updated.
+        if (Auth::find($userId)->update(['blocked' => $status])) { // The user is updated.
             $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('message', 'De user status has been updated');
         }
@@ -117,10 +117,10 @@ class Users extends CI_Controller
             $input['password']  = md5($this->input->post('password'));
             $input['blocked']   = 0;
 
-            $user['create'] = Login::create($input);
+            $user['create'] = Auth::create($input);
 
             $permission['find']  = Permission::where('name', 'access_guest')->first();
-            $permission['grant'] = Login::find($user['create']->id)->permissions()->attach($permission['grant']->id);
+            $permission['grant'] = Auth::find($user['create']->id)->permissions()->attach($permission['grant']->id);
 
             if ($user['create'] && $permission['grant']) { // The user is created.
                 $this->session->set_flashdata('class', 'alert alert-success');

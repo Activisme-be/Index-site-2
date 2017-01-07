@@ -98,7 +98,7 @@ class Login extends CI_Controller
     {
         $input['email'] = $this->input->post('email');
 
-        $query['user']  = Login::where('email', $input['email'])
+        $query['user']  = Auth::where('email', $input['email'])
             ->with('permissions')
             ->where('blocked', 0)
             ->where('password', md5($password));
@@ -167,7 +167,7 @@ class Login extends CI_Controller
 
         $data['pass']  = random_string('alnum', 18);
         $data['email'] = $this->input->post('email');
-        $data['user']  = Login::where('email', $data['email']);
+        $data['user']  = Auth::where('email', $data['email']);
 
         if ($data['user']->count() === 1) { // There is a record found in the database.
             if ($data['user']->update(['password' => mds($data['pass'])])) { // The user has been updated so send them a mail.
