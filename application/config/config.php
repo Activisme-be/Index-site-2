@@ -390,8 +390,8 @@ $config['sess_regenerate_destroy'] = TRUE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= '';
-$config['cookie_domain']	= '';
+$config['cookie_prefix']	= 'activisme';
+$config['cookie_domain']	= '.activisme.be';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
 $config['cookie_httponly'] 	= FALSE;

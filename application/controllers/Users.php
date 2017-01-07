@@ -45,7 +45,7 @@ class Users extends CI_Controller
         $data['title'] = 'user management';
         $data['users'] = Login::all(); // FIXME: Set CI pagination.
 
-        return $this->blade->render('', $data);
+        return $this->blade->render('users/index', $data);
     }
 
     /**
@@ -65,6 +65,9 @@ class Users extends CI_Controller
 
     /**
      * Block or Unblock the user in the system.
+     *
+     * @see
+     * @return 
      */
     public function status()
     {
@@ -88,7 +91,7 @@ class Users extends CI_Controller
     public function create()
     {
         $data['title'] = 'Register new user';
-        return $this->blade->render('', $data);
+        return $this->blade->render('users/create', $data);
     }
 
     /**
@@ -106,7 +109,7 @@ class Users extends CI_Controller
 
         if ($this->form_validation->run() == false) { // Form validation fails.
             $data['title'] = '';
-            return $this->blade->render('', $data);
+            return $this->blade->render('users/create', $data);
         } else { // Validation passes
             $input['name']      = $this->input->post('name');
             $input['username']  = $this->input->post('username');
@@ -114,7 +117,12 @@ class Users extends CI_Controller
             $input['password']  = md5($this->input->post('password'));
             $input['blocked']   = 0;
 
-            if (Login::create($input)) { // The user is created.
+            $user['create'] = Login::create($input);
+
+            $permission['find']  = Permission::where('name', 'access_guest')->first();
+            $permission['grant'] = Login::find($user['create']->id)->permissions()->attach($permission['grant']->id);
+
+            if ($user['create'] && $permission['grant']) { // The user is created.
                 $this->session->set_flashdata('class', 'alert alert-success');
                 $this->session->set_flashdata('message', 'The user is created');
             }

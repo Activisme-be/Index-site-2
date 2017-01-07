@@ -14,6 +14,8 @@ class News extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper();
+        $this->load->library();
     }
 
     /**
@@ -46,7 +48,7 @@ class News extends CI_Controller
      */
     public function index()
     {
-
+        return $this->blade->render('', $data);
     }
 
     /**
@@ -131,7 +133,7 @@ class News extends CI_Controller
      * Update a news item in the database.
      *
      * @see
-     * @return
+     * @return response | Redirect
      */
     public function update()
     {
